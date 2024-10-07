@@ -1,1 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeEP</title> <!-- Updated title in the browser tab -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome stylesheet -->
+    <style>
+        body, html {
+            margin: 0;
+            height: 100%;
+            overflow: hidden;
+        }
 
+        .video-background {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            transform: translate(-50%, -50%); /* Center the video */
+        }
+
+        .text-overlay {
+            position: absolute;
+            top: 30%; /* Moved up further */
+            left: 50%; /* Center horizontally */
+            transform: translate(-50%, -50%); /* Adjust for exact center */
+            color: white; /* Text color */
+            font-size: 48px; /* Increased font size */
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7); /* Adjusted shadow for depth */
+            text-decoration: none; /* Remove underline */
+            z-index: 1; /* Ensure text is above the video */
+        }
+
+        .social-links {
+            position: absolute;
+            top: 38%; /* Moved up further */
+            left: 50%; /* Center horizontally */
+            transform: translate(-50%, -50%); /* Adjust for exact center */
+            z-index: 1; /* Ensure links are above the video */
+            display: flex; /* Use flexbox for alignment */
+            justify-content: center; /* Center the links */
+            gap: 15px; /* Reduced space between links */
+        }
+
+        .social-links a {
+            color: white; /* Link color */
+            text-decoration: underline; /* Underline by default */
+            font-size: 14px; /* Smaller link font size */
+            transition: color 0.3s; /* Smooth transition for color change */
+            text-transform: lowercase; /* Make all letters lowercase */
+        }
+
+        .social-links a:hover {
+            color: red; /* Change color to red on hover */
+            text-decoration: underline; /* Keep underline on hover */
+        }
+    </style>
+</head>
+<body>
+    <video autoplay muted loop class="video-background">
+        <source src="animegirl.mp4" type="video/mp4"> <!-- Update path if needed -->
+        Your browser does not support the video tag.
+    </video>
+    <div class="text-overlay">weep.lol</div> <!-- Overlay text -->
+    <div class="social-links">
+        <a href="https://www.roblox.com/users/3964701786/profile" target="_blank">roblox</a>
+        <a href="https://www.instagram.com/cuffplay/" target="_blank">instagram</a>
+        <!-- Telegram link removed -->
+    </div> <!-- Social links -->
+    
+    <audio autoplay loop>
+        <source src="songfile.mp3" type="audio/mpeg"> <!-- Update this path to your music file -->
+        Your browser does not support the audio tag.
+    </audio>
+</body>
+</html>
