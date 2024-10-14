@@ -4,71 +4,85 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>weep</title>
+    <link rel="shortcut icon" type="x-icon" href="favicon.ico">
     <style>
         body, html {
             margin: 0;
             height: 100%;
             overflow: hidden;
-            background-color: black; /* Set background to black */
+            background-color: black;
             display: flex;
-            flex-direction: column; /* Stack elements vertically */
-            justify-content: center; /* Center vertically */
-            align-items: center; /* Center horizontally */
-            position: relative; /* Added for positioning overlay */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
         }
 
         .video-background {
-            width: calc(80% + 30px); /* Increased width by 30 pixels for 15 pixels on each side */
-            max-width: 815px; /* Adjust maximum width accordingly */
-            display: flex; /* Added to enable centering of the video */
-            justify-content: center; /* Center the video */
+            width: calc(80% + 30px);
+            max-width: 815px;
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
         }
 
         video {
-            width: 100%; /* Make video responsive */
-            height: auto; /* Maintain aspect ratio */
+            width: 100%;
+            height: auto;
         }
 
-        .text {
-            color: white; /* Text color */
-            font-size: 16px; /* Smaller font size */
-            text-align: center; /* Center text */
-            margin-bottom: 2px; /* Space below the text */
+        .swinging-image {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            filter: grayscale(100%);
+            width: 10%;
+            transform-origin: top center;
+            animation: swing 5s ease-in-out infinite;
+        }
+
+        @keyframes swing {
+            0% { transform: translateX(-50%) rotate(-10deg); }
+            50% { transform: translateX(-50%) rotate(10deg); }
+            100% { transform: translateX(-50%) rotate(-10deg); }
         }
     </style>
 </head>
 <body>
+    <img src="sayori.png" alt="Swinging Image" class="swinging-image">
     <div class="text">narc cucks you lol</div>
     <div class="video-background">
         <video id="video" controls muted loop>
             <source src="weepvid.mp4" type="video/mp4">
-            Your browser does not support the video tag.
         </video>
     </div>
 
     <audio id="background-audio" loop>
-        <source src="songfile.mp3" type="audio/mpeg">
-        Your browser does not support the audio tag.
+        <source src="audio.mp3" type="audio/mpeg">
     </audio>
 
     <script>
-        let audioPlayed = false;
         const video = document.getElementById("video");
+        const audio = document.getElementById("background-audio");
 
         // Play audio when video is played
-        video.addEventListener('play', playAudio);
-        
-        function playAudio() {
-            if (!audioPlayed) {
-                const audio = document.getElementById("background-audio");
-                audio.play().then(() => {
-                    console.log("Audio is playing");
-                }).catch((error) => {
-                    console.log("Audio playback failed:", error);
-                });
-                audioPlayed = true; // Prevent further audio play attempts
-            }
-        }
+        video.addEventListener('play', () => {
+            audio.play().catch(error => {
+                console.log("Audio playback failed:", error);
+            });
+        });
+
+        // Pause audio when video is paused
+        video.addEventListener('pause', () => {
+            audio.pause();
+        });
+
+        // Reset audio when video ends
+        video.addEventListener('ended', () => {
+            audio.currentTime = 0; // Reset audio to the start
+            audio.pause();
+        });
     </script>
 </body>
 </html>
