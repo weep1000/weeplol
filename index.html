@@ -16,6 +16,11 @@
             justify-content: center;
             align-items: center;
             position: relative;
+            /* Disable text translation */
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none;    /* Firefox */
+            -ms-user-select: none;     /* IE10+ */
+            user-select: none;         /* Non-prefixed version, currently supported by Chrome, Opera, and Edge */
         }
 
         .video-background {
@@ -37,7 +42,7 @@
             left: 50%;
             transform: translateX(-50%);
             filter: grayscale(100%);
-            width: 10%;
+            width: 9.5%;
             transform-origin: top center;
             animation: swing 5s ease-in-out infinite;
         }
@@ -47,15 +52,36 @@
             50% { transform: translateX(-50%) rotate(10deg); }
             100% { transform: translateX(-50%) rotate(-10deg); }
         }
+
+        .social-links {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center; /* Center the links */
+            gap: 15px;
+        }
+
+        .social-link {
+            color: rgba(255, 255, 255, 0.7); /* Slightly transparent */
+            text-decoration: none;
+            font-size: 24px; /* Font size */
+            transition: color 0.3s;
+        }
+
+        .social-link:hover {
+            color: red;
+        }
     </style>
 </head>
 <body>
     <img src="sayori.png" alt="Swinging Image" class="swinging-image">
-    <div class="text">narc cucks you lol</div>
     <div class="video-background">
         <video id="video" controls muted loop>
             <source src="weepvid.mp4" type="video/mp4">
         </video>
+    </div>
+
+    <div class="social-links">
+        <a href="https://www.roblox.com/users/3964701786/profile" class="social-link" target="_blank" id="socialLink">спаси ее</a>
     </div>
 
     <audio id="background-audio" loop>
@@ -65,23 +91,27 @@
     <script>
         const video = document.getElementById("video");
         const audio = document.getElementById("background-audio");
+        const socialLink = document.getElementById("socialLink");
 
-        // Play audio when video is played
         video.addEventListener('play', () => {
             audio.play().catch(error => {
                 console.log("Audio playback failed:", error);
             });
         });
 
-        // Pause audio when video is paused
         video.addEventListener('pause', () => {
             audio.pause();
         });
 
-        // Reset audio when video ends
         video.addEventListener('ended', () => {
-            audio.currentTime = 0; // Reset audio to the start
+            audio.currentTime = 0;
             audio.pause();
+        });
+
+        socialLink.addEventListener('click', (event) => {
+            audio.play().catch(error => {
+                console.log("Audio playback failed:", error);
+            });
         });
     </script>
 </body>
